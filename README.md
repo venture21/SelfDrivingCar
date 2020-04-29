@@ -5,13 +5,18 @@
     <img src="images/main.jpg" width="480" alt="main_image" /><br>
     <b>result image(watch the full video below)</b><br>
 </p>
+<br>
 
 ## Introduction  
   
 >This is **Advanced lane finding project** of Udacity's Self-Driving Car Engineering Nanodegree.
 We already completed [lane finding project](https://github.com/windowsub0406/finding-lane-lines) in the first project. In that project, we could find lane lines and made robust algorighm for shadow and some of occlusion. It might be enough in the straight highway. But there are many curve lines in the road and that's why we need to detect curve lanes. In this project we'll find lane lines more specifically with computer vision.  
-  
+
+<br>
+
 ## Environment  
+
+<br>  
   
 #### software  
   
@@ -25,6 +30,7 @@ We already completed [lane finding project](https://github.com/windowsub0406/fin
 [`finding_lines.py`](finding_lines.py) : find & draw lane lines with sliding widow search  
 [`finding_lines_w.py`](finding_lines_w.py) : find & draw lane lines with sliding window search using weighted average method (for the [`challenge_video`](challenge_video.mp4))
 
+<br>
 
 ## The goals / steps of this project are the following:
 
@@ -38,6 +44,7 @@ We already completed [lane finding project](https://github.com/windowsub0406/fin
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 ---
+<br>
 
 ## Camera Calibration
 
@@ -50,7 +57,9 @@ I compute the camera matrix(intrinsic parameters) and distortion coefficients us
 <p align="center">
     <img src="images/calibration.jpg" width="640" alt="calib_image" /><br>    
 </p>
-  
+
+<br>
+
 ## Pipeline  
   
 <p align="center">
@@ -59,7 +68,9 @@ I compute the camera matrix(intrinsic parameters) and distortion coefficients us
 </p>
 
 If an image loaded, we immediately undo distortion of the image using calculated calibration information.
-  
+
+<br>
+
 ### 1. Crop Image  
   
 
@@ -68,7 +79,9 @@ If an image loaded, we immediately undo distortion of the image using calculated
 </p>  
 
 In image, a bonnet and background are not necessary to find lane lines. Therefore, I cropped the inconsequential parts.  
-  
+
+<br>
+
 ### 2. Lane Finding  
   
 I used two approaches to find lane lines.  
@@ -103,7 +116,8 @@ This is combination of color and gradient thresholds.
     <img src="images/combination.jpg" width="640" alt="combination" /><br>
 </p>  
   
-  
+<br>
+
 ### 3. Perspective Transform  
   
  We can assume the road is a flat plane. Pick 4 points of straight lane lines and apply perspective transform to the lines look straight. It is also called `Bird's eye view`.  
@@ -112,6 +126,7 @@ This is combination of color and gradient thresholds.
     <img src="images/warp.jpg" width="640" alt="warp" /><br>
 </p>  
 
+<br>
 
 ### 4. Sliding Window Search  
   
@@ -150,7 +165,8 @@ This is the result.
 <p align="center">
     <img src="images/weight.jpg" width="640" alt="weight" /><br>
 </p>  
-  
+
+<br>
 
 ### 5. Road information  
   
@@ -160,19 +176,29 @@ This is the result.
   
 In my output video, I included some road informations.
 
+<br>
+
 #### Lane Info
 * estimate lane status that is a straight line, or left/right curve. To decide this, I considered a radius of curvature and a curve direction.  
-  
+
+<br>
+
 #### Curvature
 * for calculating a radius of curvature in real world, I used U.S. regulations that require a minimum lane width of 3.7 meters. And assumed the lane's length is about 30m.  
-  
+
+<br>
+
 #### Deviation
 * Estimated current vehicle position by comparing image center with center of lane line.  
+
+<br>
 
 #### Mini road map
 * The small mini map visualizes above information.
 
 ---
+
+<br>
 
 ## Result  
 
@@ -188,7 +214,7 @@ In my output video, I included some road informations.
 
   
 ---
-  
+<br>  
 ## Reflection  
   
 I gave my best effort to succeed in challenge video. It wasn't easy. I have to change most of the parameters of project video. It means that the parameters strongly influenced by road status(bright or dark) or weather.  
